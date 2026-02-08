@@ -1,0 +1,28 @@
+{
+  "homes": [
+    {
+      "home_id": "1be0c2b08e",
+      "home_name": "애월",
+      "pat": "replace",
+      "country": "KR",
+      "client_id": "team-dashboard-46413463",
+      "server": "https://api-kic.lgthinq.com"
+    },
+    {
+      "home_id": "36ba33fb0b",
+      "home_name": "창원 SC",
+      "pat": "replace",
+      "country": "KR",
+      "client_id": "team-dashboard-b75bcb8d",
+      "server": "https://api-kic.lgthinq.com"
+    },
+    {
+      "home_id": "04a5d82c80",
+      "home_name": "김제",
+      "pat": "replace",
+      "country": "KR",
+      "client_id": "team-dashboard-e93cf387",
+      "server": "https://api-kic.lgthinq.com"
+    }
+  ]
+}

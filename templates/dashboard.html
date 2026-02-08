@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ThinQ Team Dashboard (Text)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; margin: 16px; }
+    h1 { margin: 0 0 8px 0; font-size: 20px; }
+    .meta { color: #555; font-size: 13px; margin-bottom: 12px; }
+    .list { display: flex; flex-direction: column; gap: 10px; }
+    details { border: 1px solid #ddd; border-radius: 10px; padding: 8px 10px; }
+    summary { cursor: pointer; list-style: none; }
+    summary::-webkit-details-marker { display:none; }
+    .home-row { display:flex; flex-wrap:wrap; gap:10px; align-items:baseline; font-size:14px; }
+    .delete-btn {
+      margin-left: auto;   /* ⭐ 이게 핵심 */
+      font-size: 12px;
+      padding: 4px 8px;
+      border: 1px solid #c53030;
+      background: transparent;
+      color: #c53030;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .home-name { font-weight:700; }
+    .pill { display:inline-block; padding:1px 8px; border-radius:999px; border:1px solid #ccc; font-size:12px; }
+    .pill.partial { border-color: #d69e2e; color: #d69e2e; }
+    .online { border-color:#2f855a; }
+    .offline { border-color:#c53030; }
+    .dim { color:#666; }
+    .devices { margin-top:10px; padding-left:14px; }
+    .devices-title { font-weight:700; margin:6px 0; }
+    .device { margin:8px 0; }
+    .device-line { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:13px; }
+    .control { margin-top:4px; font-size:13px; }
+    button { font-size:12px; padding:4px 8px; margin-right:6px; cursor:pointer; }
+    .readonly { color:#666; }
+    .footer { margin-top:16px; color:#666; font-size:12px; }
+    #topbar {
+ 	 position: fixed;
+ 	 top: 12px;
+ 	 right: 12px;
+	}
+
+	#adminBtn {
+	  font-size: 18px;
+	  background: none;
+	  border: none;
+	  cursor: pointer;
+	}
+
+    /* 관리자 패널(텍스트 UI) */
+    .admin { margin: 14px 0; padding: 10px; border:1px dashed #ccc; border-radius:10px; }
+    .admin h2 { margin: 0 0 8px; font-size: 14px; }
+    .admin .row { display:flex; flex-wrap:wrap; gap:8px; margin: 6px 0; }
+    .admin input { padding: 6px 8px; font-size: 13px; min-width: 220px; }
+    .admin small { color:#666; }
+  </style>
+</head>
+<body>
+  <div id="topbar">
+  <button id="adminBtn" title="Admin">⚙️</button>
+  </div>
+  <h1>Smart Cottage - Global View</h1>
+
+  <div class="meta">
+    Last refresh: <span id="lastRefresh">-</span>
+    <button id="btnRefresh">Refresh</button>
+  </div>
+  <div class="admin" id="adminPanel" style="display:none;">
+    <h2>관리자: 집 추가</h2>
+    <div class="row">
+      <input id="homeName" placeholder="집 이름 (예: 애월 스마트코티지)" />
+      <input id="pat" placeholder="PAT (Bearer 없이 토큰만)" />
+      <input id="country" placeholder="국가코드 (예: KR)" value="KR" />
+    </div>
+    <div class="row">
+      <input id="server" placeholder="서버 (예: https://api-kic.lgthinq.com)" value="https://api-kic.lgthinq.com" />
+      <input id="clientId" placeholder="x-client-id (없으면 자동 생성)" />
+      <input id="adminKey" placeholder="ADMIN_KEY (서버에 설정했으면 입력)" />
+    </div>
+    <div class="row">
+      <button id="btnAddHome">집 추가</button>
+      <small>PAT는 브라우저에 입력되지만, 서버가 저장하고 프론트로 다시 내려보내진 않게 해둠.</small>
+    </div>
+    <div id="adminMsg" class="meta"></div>
+  </div>
+
+  <div class="list" id="homeList"></div>
+
+  <div class="footer">
+    규칙: 기본 접힘 / 여러 집 동시 펼침 가능 / (일단) 상태 조회만 실제 연동
+  </div>
+
+  <script src="/static/app.js"></script>
+  <div id="adminModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4);">
+  <div style="background:#fff; padding:16px; width:300px; margin:120px auto; border-radius:10px;">
+    <h3 style="margin-top:0;">Admin Access</h3>
+    <input id="adminPassInput" type="password" placeholder="Password" style="width:100%; padding:6px;">
+    <div style="margin-top:10px; text-align:right;">
+      <button id="adminCancel">Cancel</button>
+      <button id="adminEnter">Enter</button>
+    </div>
+    <div id="adminError" style="color:red; font-size:12px; margin-top:6px;"></div>
+  </div>
+</div>
+</body>
+</html>

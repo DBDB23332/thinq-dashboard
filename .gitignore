@@ -1,0 +1,6 @@
+homes.json
+.env
+__pycache__/
+*.log
+.vscode/
+.DS_Store
